@@ -1,0 +1,9 @@
+diff --git a/flashtnc.py b/flashtnc.py
+index 65ffb19..d571a33 100644
+--- a/flashtnc.py
++++ b/flashtnc.py
+@@ -1,3 +1,4 @@
++#!/usr/bin/env python3
+ # N9600A Firmware Updater version d
+ # Nino Carrillo
+ # David Arthur
