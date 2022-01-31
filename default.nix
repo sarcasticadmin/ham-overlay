@@ -5,4 +5,5 @@ self: super:
   libax25 = super.callPackage ./pkgs/libax25 { };
   pat = super.callPackage ./pkgs/pat { };
   flashtnc = super.callPackage ./pkgs/flashtnc { };
+  maidenhead = super.callPackage ./pkgs/maidenhead { };
 }
