@@ -12,6 +12,10 @@ stdenv.mkDerivation rec {
     sha256 = "1kv9b0vzapl69067q0qq8cm840f1cnxf6qdiksm78q5jjpnis5rs";
   };
 
+  # Ignore prefixing to /nix/store
+  # TODO: Make prefix configurable
+  configureFlags = [ "--sysconfdir=/etc" ];
+
   meta = with lib; {
     description = "ax25 tools";
     homepage = "https://www.linux-ax25.org/wiki/ax25-tools";
