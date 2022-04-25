@@ -13,14 +13,18 @@ buildGoModule rec {
   };
 
   vendorSha256 = "00dfhb34aabqhy4zyvz5389a502p7jnmwb3zglsdvvmy6hr9rk59";
-  
+
+  # Seems to work out instead of explicitly setting CGO_LDFLAGS & CGO_CFLAGS
   buildInputs = [ libax25 ];
-  
+
+  # tags need to be specified for libax25 regardless of it being in build PATH
+  # https://github.com/la5nta/pat/blob/18d49336be03f6873ba377a6ad127a782205b09c/make.bash#L58
+  tags = [ "libax25" ];
+
   # Mimicked dependencies and build procedure
   # https://github.com/la5nta/pat/blob/master/make.bash
   # Need to fix rev to actually be commit hash
-  buildFlagsArray = [
-    "-ldflags="
+  ldflags = [
     "-X main.GitRev=${rev}"
   ];
 
