@@ -31,6 +31,7 @@ with nixpkgs;
     # Installs all necessary packages for the iso
     systemPackages = [
       aprx
+      ax25-tools
       tncattach
       libax25
       pat
