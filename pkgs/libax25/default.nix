@@ -12,8 +12,13 @@ stdenv.mkDerivation rec {
     sha256 = "1xnxab6n8w8b00dmg5idb6xwqs3llqsl0wv6s3xkf72pn1p1f7k5";
   };
 
+  # Ignore prefixing to /nix/store
+  # TODO: Make prefix configurable
+  configureFlags = [ "--sysconfdir=/etc" ];
+
   # Build libax25 staticly since downstream pat wants it to be static
   LDFLAGS="-static-libgcc -static";
+
   meta = with lib; {
     description = "A set of functions making it easier to write hamradio programs";
     homepage = "https://www.linux-ax25.org/wiki/Libax25";
