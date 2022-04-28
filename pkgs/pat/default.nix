@@ -2,17 +2,17 @@
 
 buildGoModule rec {
   pname = "pat";
-  version = "0.11.0";
+  version = "0.12.1";
   owner = "la5nta";
   rev = "v${version}";
 
   src = fetchFromGitHub {
     inherit owner rev;
     repo = pname;
-    sha256 = "1cvmikifxqfcwmvf0ry29bdaz916a6znffkhcx50icx7zmcdyjry";
+    sha256 = "sha256-QqEJgTydCJ6TTQljkZG3imsIpEDN8U4M4AVKvIgLSZ0=";
   };
 
-  vendorSha256 = "00dfhb34aabqhy4zyvz5389a502p7jnmwb3zglsdvvmy6hr9rk59";
+  vendorSha256 = "sha256-+7Xy7ZZmU8nOy8T70JecE6qa9WQs0mVv2Gdm/Sd7/7M=";
 
   # Seems to work out instead of explicitly setting CGO_LDFLAGS & CGO_CFLAGS
   buildInputs = [ libax25 ];
