@@ -2,6 +2,7 @@ self: super:
 {
   aprx = super.callPackage ./pkgs/aprx { };
   tncattach = super.callPackage ./pkgs/tncattach { };
+  lab599-updatefirmware = super.callPackage ./pkgs/lab599-updatefirmware { };
   libax25 = super.callPackage ./pkgs/libax25 { };
   ax25-tools = super.callPackage ./pkgs/ax25-tools { };
   ax25-apps = super.callPackage ./pkgs/ax25-apps { };

@@ -11,5 +11,6 @@ mkShell {
     ax25-tools
     pat
     flashtnc
+    lab599-updatefirmware
   ];
 }
