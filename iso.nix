@@ -37,6 +37,7 @@ with nixpkgs;
       libax25
       pat
       flashtnc
+      tmux
     ];
 
     # libax25, etc. are set to assume the common config path
