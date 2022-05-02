@@ -32,10 +32,12 @@ with nixpkgs;
     systemPackages = [
       aprx
       ax25-tools
+      ax25-apps
       tncattach
       libax25
       pat
       flashtnc
+      tmux
     ];
 
     # libax25, etc. are set to assume the common config path
