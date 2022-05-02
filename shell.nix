@@ -11,5 +11,6 @@ mkShell {
     ax25-tools
     pat
     flashtnc
+    hamlib
   ];
 }
