@@ -4,6 +4,6 @@ index 65ffb19..d571a33 100644
 +++ b/flashtnc.py
 @@ -1,3 +1,4 @@
 +#!/usr/bin/env python3
- # N9600A Firmware Updater version d
+ # N9600A Firmware Updater version f
  # Nino Carrillo
  # David Arthur
