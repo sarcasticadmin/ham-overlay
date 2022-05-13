@@ -14,7 +14,7 @@ stdenvNoCC.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/bin
-    install -D -m 755 lab599-updatefirmware $out/bin/lab599-updatefirmware
+    install -D -m 755 $src $out/bin/lab599-updatefirmware
   '';
 
   meta = with lib; {
