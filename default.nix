@@ -8,4 +8,5 @@ self: super:
   pat = super.callPackage ./pkgs/pat { };
   flashtnc = super.callPackage ./pkgs/flashtnc { };
   maidenhead = super.callPackage ./pkgs/maidenhead { };
+  hamlib = super.callPackage ./pkgs/hamlib { };
 }
