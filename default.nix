@@ -9,4 +9,5 @@ self: super:
   flashtnc = super.callPackage ./pkgs/flashtnc { };
   maidenhead = super.callPackage ./pkgs/maidenhead { };
   hamlib = super.callPackage ./pkgs/hamlib { };
+  chirpc = super.callPackage ./pkgs/chirpc { };
 }

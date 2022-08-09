@@ -12,5 +12,6 @@ mkShell {
     pat
     flashtnc
     hamlib
+    chirpc
   ];
 }
