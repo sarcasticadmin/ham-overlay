@@ -5,12 +5,14 @@ in
 with nixpkgs;
 mkShell {
   buildInputs = [
-    aprx
-    tncattach
+    #aprx
+    #tncattach
     libax25
-    ax25-tools
     pat
+    #ax25-tools
     flashtnc
-    hamlib
+    (python3.withPackages
+      (pythonPackages: with pythonPackages; [ pyserial ]))
+    #hamlib
   ];
 }
