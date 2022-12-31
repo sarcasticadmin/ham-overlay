@@ -1,9 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
-  ];
   boot.kernelPatches = [{
     name = "packet-radio-protocols";
     patch = null;
