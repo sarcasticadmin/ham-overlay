@@ -1,0 +1,43 @@
+#!/usr/bin/env expect -f
+
+# Assuming gnudate
+spawn date +%y%m%d%H%M%S
+expect {
+  -re "(.+)" { set thedate $expect_out(0,string);}
+}
+
+# Spawn kermit in quiet mode
+spawn kermit kantronics-3plus.kermit -q
+set timeout 20
+#expect "Connecting to*"
+sleep 2
+send "\r"
+expect "cmd:"
+# Set monitoring off while programming TNC
+send "MONITOR OFF\r"
+expect {
+  "MONITOR was *" exp_continue
+  "cmd:" {
+    send "MYCALL KM6LBU-6\r"
+  } 
+}
+sleep 1
+expect {
+  "cmd:" {
+    send "MYPBBS KM6LBU-7\r"
+  } 
+}
+expect {
+  "cmd:" {
+    # Must be in yymmddhhmm[ss]
+    send "DAYTIME $thedate\r"
+  } 
+}
+sleep 2
+expect {
+  "cmd:" {
+    # Set monitoring back on after programming complete
+    send "MONITOR ON\r"
+    send_user "\n\nFinished programming KPC-3 TNC!\n\n"
+  }
+}
