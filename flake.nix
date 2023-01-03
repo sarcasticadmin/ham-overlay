@@ -1,7 +1,7 @@
 {
   inputs = {
     # many pkgs upstream havent made it in an official release yet
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/master";
   };
   outputs = { self, nixpkgs, ... }:
     let
