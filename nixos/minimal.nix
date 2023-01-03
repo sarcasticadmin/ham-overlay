@@ -22,7 +22,7 @@
 
   environment = {
     # Installs all necessary packages for the minimal
-    systemPackages = [
+    systemPackages = with pkgs; [
       aprx
       ax25-tools
       ax25-apps
