@@ -21,6 +21,8 @@ stdenv.mkDerivation rec {
     install -D -m 644 aprx.8 $out/share/man/man8/aprx.8
   '';
 
+  CFLAGS="-fcommon -O2";
+
   meta = with lib; {
     description = "A multitalented APRS i-gate / digipeater";
     homepage = "http://thelifeofkenneth.com/aprx";
