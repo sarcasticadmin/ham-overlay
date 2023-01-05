@@ -17,9 +17,6 @@
     in
     {
       overlays.default = import ./default.nix;
-      #packages = forAllSystems (system: {
-      #  inherit (nixpkgsFor.${system}) scaleTests;
-      #});
 
       nixosConfigurations = forAllSystems (system:
         let
@@ -28,7 +25,6 @@
         {
           minimal = nixpkgs.lib.nixosSystem {
             inherit system pkgs;
-            #modules = [];
             modules = [
               ({ modulesPath, ... }: {
                 imports = [
