@@ -50,4 +50,6 @@
     };
 
   };
+
+  services.tlp.enable = true;
 }
