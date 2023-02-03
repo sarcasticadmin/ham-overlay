@@ -34,6 +34,12 @@
               ./nixos/minimal.nix
             ];
           };
+          minimalrun = nixpkgs.lib.nixosSystem {
+            inherit system pkgs;
+            modules = [
+              ./nixos/minimal.nix
+            ];
+          };
         });
 
       # Like nix-shell
