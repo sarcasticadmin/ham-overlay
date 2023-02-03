@@ -5,6 +5,16 @@
     [
       ./hardware-configuration.nix
     ];
+
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Need to be set for ZFS or else leads to:
+  # Failed assertions:
+  # - ZFS requires networking.hostId to be set
+  networking.hostId = "9f602d2b";
+
   #boot.kernelPatches = [{
   #  name = "packet-radio-protocols";
   #  patch = null;
