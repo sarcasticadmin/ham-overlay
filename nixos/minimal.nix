@@ -1,6 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
+  imports =
+    [
+      ./hardware-configuration.nix
+    ];
   #boot.kernelPatches = [{
   #  name = "packet-radio-protocols";
   #  patch = null;
