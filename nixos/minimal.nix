@@ -1,24 +1,24 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
-  boot.kernelPatches = [{
-    name = "packet-radio-protocols";
+  #boot.kernelPatches = [{
+  #  name = "packet-radio-protocols";
+  #  patch = null;
+  #  extraConfig = ''
+  #    HAMRADIO y
+  #    AX25 y
+  #    AX25_DAMA_SLAVE y
+  #  '';
+  #}];
+  boot.kernelPatches = lib.singleton {
+    name = "ax25-ham";
     patch = null;
-    extraConfig = ''
-      HAMRADIO y
-      AX25 y
-      AX25_DAMA_SLAVE y
-      NETROM m
-      ROSE m
-      MKISS y
-      6PACK y
-      BPQETHER y
-      BAYCOM_SER_FDX y
-      BAYCOM_SER_HDX y
-      BAYCOM_PAR m
-      YAM y
-    '';
-  }];
+    extraStructuredConfig = with lib.kernel; {
+      HAMRADIO = yes;
+      AX25 = yes;
+      AX25_DAMA_SLAVE = yes;
+    };
+  };
 
   environment = {
     # Installs all necessary packages for the minimal
@@ -50,6 +50,10 @@
     };
 
   };
+
+  # Bug in kernels ~5.4<5.19
+  # Resulting in pat to error with: address already in use error after first connection
+  boot.kernelPackages = pkgs.linuxPackages_6_0;
 
   services.tlp.enable = true;
 }
