@@ -40,13 +40,13 @@
 
       # Like nix-shell
       # Good example: https://github.com/tcdi/pgx/blob/master/flake.nix
-      devShells = forAllSystems (system:
-        let
-          pkgs = nixpkgsFor.${system};
-        in
-        {
-          default = import ./shell.nix { inherit pkgs; };
-        });
+      #devShells = forAllSystems (system:
+      #  let
+      #    pkgs = nixpkgsFor.${system};
+      #  in
+      #  {
+      #    default = import ./shell.nix { inherit pkgs; };
+      #  });
     };
   # Bold green prompt for `nix develop`
   # Had to add extra escape chars to each special char
