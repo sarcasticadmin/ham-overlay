@@ -31,7 +31,7 @@
           ];
         };
         minimalrun = nixpkgs.lib.nixosSystem {
-          inherit system pkgs;
+          system = "x86_64-linux";
           modules = [
             ./nixos/minimal.nix
           ];
