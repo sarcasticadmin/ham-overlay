@@ -18,29 +18,25 @@
     {
       overlays.default = import ./default.nix;
 
-      nixosConfigurations = forAllSystems (system:
-        let
-          pkgs = nixpkgsFor.${system};
-        in
-        {
-          minimal = nixpkgs.lib.nixosSystem {
-            inherit system pkgs;
-            modules = [
-              ({ modulesPath, ... }: {
-                imports = [
-                  "${toString modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
-                ];
-              })
-              ./nixos/minimal.nix
-            ];
-          };
-          minimalrun = nixpkgs.lib.nixosSystem {
-            inherit system pkgs;
-            modules = [
-              ./nixos/minimal.nix
-            ];
-          };
-        });
+      nixosConfigurations = {
+        minimal = nixpkgs.lib.nixosSystem {
+          inherit system pkgs;
+          modules = [
+            ({ modulesPath, ... }: {
+              imports = [
+                "${toString modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
+              ];
+            })
+            ./nixos/minimal.nix
+          ];
+        };
+        minimalrun = nixpkgs.lib.nixosSystem {
+          inherit system pkgs;
+          modules = [
+            ./nixos/minimal.nix
+          ];
+        };
+      };
 
       # Like nix-shell
       # Good example: https://github.com/tcdi/pgx/blob/master/flake.nix
