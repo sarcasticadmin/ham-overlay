@@ -5,15 +5,14 @@
   };
   outputs = { self, nixpkgs, ... }:
     let
-      # System types to support.
-      supportedSystems = [ "x86_64-linux" ];
-
-      # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
-      forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
-
-      # Nixpkgs instantiated for supported system types.
-      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; overlays = [ self.overlays.default ]; });
-      #nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; overlays = [ ]; });
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [
+          self.overlays.default
+        ];
+        config = { allowUnfree = true; };
+      };
     in
     {
       overlays.default = import ./default.nix;
@@ -31,6 +30,7 @@
           ];
         };
         minimalrun = nixpkgs.lib.nixosSystem {
+          inherit pkgs;
           system = "x86_64-linux";
           modules = [
             ./nixos/minimal.nix
