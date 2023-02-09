@@ -13,7 +13,7 @@
   # Need to be set for ZFS or else leads to:
   # Failed assertions:
   # - ZFS requires networking.hostId to be set
-  networking.hostId = "9f602d2b";
+  networking.hostId = "e2dbfa21";
 
   #boot.kernelPatches = [{
   #  name = "packet-radio-protocols";
