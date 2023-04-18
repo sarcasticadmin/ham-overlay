@@ -15,6 +15,11 @@
   # - ZFS requires networking.hostId to be set
   networking.hostId = "e2dbfa21";
 
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.root = {
+    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMEiESod7DOT2cmT2QEYjBIrzYqTDnJLld1em3doDROq" ];
+  };
+
   #boot.kernelPatches = [{
   #  name = "packet-radio-protocols";
   #  patch = null;
@@ -63,6 +68,11 @@
       mode = "0644";
     };
 
+  };
+
+  # Enable the OpenSSH daemon.
+  services.openssh = {
+    enable = true;
   };
 
   # Bug in kernels ~5.4<5.19
