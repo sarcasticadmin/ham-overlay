@@ -1,0 +1,42 @@
+{
+  inputs = {
+    # many pkgs upstream havent made it in an official release yet
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+  };
+  outputs = { self, nixpkgs, ... }:
+    let
+      system = "x86_64-linux";
+
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [
+          self.overlays.default
+        ];
+        config = { allowUnfree = true; };
+      };
+    in
+    {
+      overlays.default = (final: prev:
+        with final.pkgs;
+        rec {
+          aprx = callPackage ./pkgs/aprx { };
+          pat = callPackage ./pkgs/pat { };
+          flashtnc = callPackage ./pkgs/flashtnc { };
+          maidenhead = callPackage ./pkgs/maidenhead { };
+        }
+      );
+
+      packages.x86_64-linux =
+        with pkgs; {
+          inherit
+            aprx
+            pat
+            flashtnc
+            maidenhead;
+        };
+    };
+
+  # Bold green prompt for `nix develop`
+  # Had to add extra escape chars to each special char
+  nixConfig.bash-prompt = "\\[\\033[01;32m\\][nix-flakes \\W] \$\\[\\033[00m\\] ";
+}
