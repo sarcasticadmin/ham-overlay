@@ -23,6 +23,7 @@
           pat = callPackage ./pkgs/pat { };
           flashtnc = callPackage ./pkgs/flashtnc { };
           maidenhead = callPackage ./pkgs/maidenhead { };
+          rmsgw = callPackage ./pkgs/rmsgw { };
         }
       );
 
@@ -32,7 +33,8 @@
             aprx
             pat
             flashtnc
-            maidenhead;
+            maidenhead
+            rmsgw;
         };
     };
 
