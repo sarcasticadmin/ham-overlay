@@ -20,6 +20,7 @@
         with final.pkgs;
         rec {
           aprx = callPackage ./pkgs/aprx { };
+          ardopc = callPackage ./pkgs/ardopc { };
           pat = callPackage ./pkgs/pat { };
           flashtnc = callPackage ./pkgs/flashtnc { };
           maidenhead = callPackage ./pkgs/maidenhead { };
@@ -31,6 +32,7 @@
         with pkgs; {
           inherit
             aprx
+            ardopc
             pat
             flashtnc
             maidenhead
