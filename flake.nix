@@ -25,6 +25,7 @@
           flashtnc = callPackage ./pkgs/flashtnc { };
           maidenhead = callPackage ./pkgs/maidenhead { };
           rmsgw = callPackage ./pkgs/rmsgw { };
+          wwl = callPackage ./pkgs/wwl { };
         }
       );
 
@@ -36,7 +37,8 @@
             pat
             flashtnc
             maidenhead
-            rmsgw;
+            rmsgw
+            wwl;
         };
     };
 
