@@ -1,37 +1,44 @@
-{ lib, buildGoModule, fetchFromGitHub, libax25}:
+{ lib
+, buildGoModule
+, fetchFromGitHub
+, stdenv
+, libax25
+}:
 
 buildGoModule rec {
   pname = "pat";
-  version = "0.12.1";
+  version = "0.14.1";
   owner = "la5nta";
   rev = "v${version}";
 
   src = fetchFromGitHub {
     inherit owner rev;
     repo = pname;
-    sha256 = "sha256-QqEJgTydCJ6TTQljkZG3imsIpEDN8U4M4AVKvIgLSZ0=";
+    sha256 = "sha256-8xOWp7dKHOsl1Xjs20UbJMt8P+gAK2mVjEs9AVS3Gj4=";
   };
 
-  vendorSha256 = "sha256-+7Xy7ZZmU8nOy8T70JecE6qa9WQs0mVv2Gdm/Sd7/7M=";
+  vendorSha256 = "sha256-14s2ijXsOArCZd7sOTbHSP0mfIXGF1J7c9wfzyEnAE8=";
 
-  # Seems to work out instead of explicitly setting CGO_LDFLAGS & CGO_CFLAGS
-  buildInputs = [ libax25 ];
+  buildInputs = lib.optional stdenv.isLinux [ libax25 ];
 
-  # tags need to be specified for libax25 regardless of it being in build PATH
-  # https://github.com/la5nta/pat/blob/18d49336be03f6873ba377a6ad127a782205b09c/make.bash#L58
-  tags = [ "libax25" ];
+  # Needed by wl2k-go go module for libax25 to include support for Linux' AX.25 stack by linking against libax25.
+  # ref: https://github.com/la5nta/wl2k-go/blob/abe3ae5bf6a2eec670a21672d461d1c3e1d4c2f3/transport/ax25/ax25.go#L11-L17
+  tags = lib.optionals stdenv.isLinux [ "libax25" ];
 
-  # Mimicked dependencies and build procedure
-  # https://github.com/la5nta/pat/blob/master/make.bash
-  # Need to fix rev to actually be commit hash
   ldflags = [
-    "-X main.GitRev=${rev}"
+    "-X github.com/la5nta/pat/internal/buildinfo.GitRev=${src.rev}"
   ];
 
+  postInstall = ''
+    install -D -m 644 man/pat-configure.1 $out/share/man/man1/pat-configure.1
+    install -D -m 644 man/pat.1 $out/share/man/man1/pat.1
+  '';
+
   meta = with lib; {
-    description = "A cross platform Winlink client with basic messaging capabilities";
+    description = "A cross platform Winlink client written in Go";
     homepage = "https://getpat.io/";
-    maintainers =  with maintainers; [ sarcasticadmin ];
     license = licenses.mit;
+    maintainers = with maintainers; [ sarcasticadmin ];
+    platforms = platforms.unix;
   };
 }
