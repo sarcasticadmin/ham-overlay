@@ -3,6 +3,8 @@
 , fetchFromGitHub
 , stdenv
 , libax25
+, testers
+, pat
 }:
 
 buildGoModule rec {
@@ -33,6 +35,13 @@ buildGoModule rec {
     install -D -m 644 man/pat-configure.1 $out/share/man/man1/pat-configure.1
     install -D -m 644 man/pat.1 $out/share/man/man1/pat.1
   '';
+
+  passthru.tests.version = testers.testVersion {
+    inherit version;
+    package = pat;
+    command = "pat version";
+  };
+
 
   meta = with lib; {
     description = "A cross platform Winlink client written in Go";
