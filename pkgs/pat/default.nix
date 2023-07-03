@@ -7,17 +7,17 @@
 
 buildGoModule rec {
   pname = "pat";
-  version = "0.14.1";
+  version = "0.15.0";
   owner = "la5nta";
   rev = "v${version}";
 
   src = fetchFromGitHub {
     inherit owner rev;
     repo = pname;
-    sha256 = "sha256-8xOWp7dKHOsl1Xjs20UbJMt8P+gAK2mVjEs9AVS3Gj4=";
+    sha256 = "sha256-ydv7RQ6MJ+ifWr+babdsDRnaS7DSAU+jiFJkQszy/Ro=";
   };
 
-  vendorSha256 = "sha256-14s2ijXsOArCZd7sOTbHSP0mfIXGF1J7c9wfzyEnAE8=";
+  vendorSha256 = "sha256-TMi5l9qzhhtdJKMkKdy7kiEJJ5UPPJLkfholl+dm/78=";
 
   buildInputs = lib.optional stdenv.isLinux [ libax25 ];
 
