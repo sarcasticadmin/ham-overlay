@@ -7,16 +7,24 @@ let
 
   ax25ToolsPkg = config.services.ax25d.package;
 
-  kissScript = pkgs.writeScript "kissScript" ''
-    #!${pkgs.runtimeShell}
-    ${ax25ToolsPkg}/bin/kissattach /dev/ninotnc wl2k
-    ${ax25ToolsPkg}/bin/kissparms -p wl2k -t 300 -l 10 -s 12 -r 80 -f n
+  axports = t: pkgs.writeText ''
+    # me callsign speed paclen window description
+    #
+    ${t.portName} ${t.callsign} ${t.paclen} ${t.window} nixmanaged
+  '';
+
+  kissScript = t: pkgs.writeScript "kissScript" ''
+    #! ${pkgs.runtimeShell}
+    ${pkgs.ax25-tools}/bin/kissattach /dev/${t.name} ${t.portName}
+    ${pkgs.ax25-tools}/bin/kissparms -p ${t.portName} -t 300 -l 10 -s 12 -r 80 -f n
   '';
 in
 {
 
   options = {
+
     services.ax25d = {
+
       enable = mkEnableOption (lib.mdDoc "ax25 daemon");
 
       package = mkOption {
@@ -25,10 +33,31 @@ in
         defaultText = literalExpression "pkgs.ax25-tools";
         description = lib.mdDoc "The ax25-tools package to use.";
       };
+
+      #tnc = mkOption {
+      #  type = types.attrs;
+      #  description = lib.mdDoc "TNC for /etc/axports.";
+      #};
+
+      axports = mkOption {
+        type = types.nullOr types.path;
+        default = null;
+        defaultText = literalExpression "axports";
+        description = lib.mdDoc ''
+          Overridable config file to use for /etc/axports. By default, use
+          nixos generated config.
+        '';
+      };
     };
   };
 
   config = {
+
+    environment.etc."ax25/axports" = {
+      source = optionalString (cfg.axports == null) (axports config.hardware.tnc);
+      mode = "0644";
+    };
+
     systemd.targets.ax25 = {
       description = "AX.25 group target";
       after = [ "network.target" "dev-ninotnc.device" ];
@@ -39,8 +68,8 @@ in
       before = [ "ax25.target" ];
       wantedBy = [ "ax25.target" ];
       bindsTo = [ "ax25.target" ];
-      serviceConfig.Type = "forking";
-      serviceConfig.ExecStart = "${kissScript}";
+      serviceConfig.Type = "oneshot";
+      serviceConfig.ExecStart = "${kissScript config.hardware.tnc}";
     };
   };
 }

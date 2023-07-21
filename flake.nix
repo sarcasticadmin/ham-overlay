@@ -48,6 +48,7 @@
         axlistend = import ./modules/axlistend.nix;
         beacond = import ./modules/beacond.nix;
         mheardd = import ./modules/mheardd.nix;
+        tnc = import ./modules/hardware/tnc.nix;
       };
 
     };
