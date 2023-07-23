@@ -40,6 +40,11 @@
             rmsgw
             wwl;
         };
+
+      nixosModules.default = {
+        ax25d = import ./modules/ax25d.nix;
+      };
+
     };
 
   # Bold green prompt for `nix develop`
