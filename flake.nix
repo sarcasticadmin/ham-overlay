@@ -43,6 +43,9 @@
 
       nixosModules.default = {
         ax25d = import ./modules/ax25d.nix;
+        axlistend = import ./modules/axlistend.nix;
+        beacond = import ./modules/beacond.nix;
+        mheardd = import ./modules/mheardd.nix;
       };
 
     };
