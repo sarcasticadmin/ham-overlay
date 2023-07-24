@@ -43,6 +43,7 @@
 
       nixosModules.default = {
         ax25d = import ./modules/ax25d.nix;
+        mheardd = import ./modules/mheardd.nix;
       };
 
     };
