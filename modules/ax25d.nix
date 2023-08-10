@@ -39,7 +39,7 @@ in
       before = [ "ax25.target" ];
       wantedBy = [ "ax25.target" ];
       bindsTo = [ "ax25.target" ];
-      serviceConfig.Type = "oneshot";
+      serviceConfig.Type = "forking";
       serviceConfig.ExecStart = "${kissScript}";
     };
   };
