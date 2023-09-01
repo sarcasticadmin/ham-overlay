@@ -26,6 +26,7 @@
           maidenhead = callPackage ./pkgs/maidenhead { };
           rmsgw = callPackage ./pkgs/rmsgw { };
           wwl = callPackage ./pkgs/wwl { };
+          uronode = callPackage ./pkgs/uronode { };
         }
       );
 
@@ -38,6 +39,7 @@
             flashtnc
             maidenhead
             rmsgw
+            uronode
             wwl;
         };
 
