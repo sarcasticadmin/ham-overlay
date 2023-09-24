@@ -1,7 +1,9 @@
 { lib
 , stdenv
-, fetchFromGithub
+, fetchFromGitHub
 , libax25
+, which
+, newt
 }:
 stdenv.mkDerivation rec {
 
@@ -9,14 +11,20 @@ stdenv.mkDerivation rec {
 
   version = "2.15";
 
-  src = fetchFromGithub {
+  src = fetchFromGitHub {
     owner = "sarcasticadmin";
     repo = "uronode";
     rev = "${version}";
-    sha256 = "";
+    sha256 = "sha256-XuHlOGT5M9OWtSiqMKoqEYW9uc1+5JihzUSV9Il99vM=";
   };
 
-  buildInputs = [ libax25 ];
+  buildInputs = [ libax25 which ];
+  
+  makeFlags = [
+      "BIN_DIR=${placeholder "out"}/bin"
+      "SBIN_DIR=${placeholder "out"}/sbin"
+      "MAN_DIR=${placeholder "out"}/share/man"
+      ];
 
   #installPhase = ''
   #  mkdir -p $out/bin
