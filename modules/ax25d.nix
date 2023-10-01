@@ -7,7 +7,7 @@ let
 
   ax25ToolsPkg = config.services.ax25d.package;
 
-  axports = t: pkgs.writeText ''
+  axports = t: pkgs.writeText "axports" ''
     # me callsign speed paclen window description
     #
     ${t.portName} ${t.callsign} ${t.paclen} ${t.window} nixmanaged
