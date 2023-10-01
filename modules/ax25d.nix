@@ -10,7 +10,7 @@ let
   axports = t: pkgs.writeText "axports" ''
     # me callsign speed paclen window description
     #
-    ${t.portName} ${t.callsign} ${t.paclen} ${t.window} nixmanaged
+    ${t.portName} ${t.callsign} ${toString t.paclen} ${toString t.window} nixmanaged
   '';
 
   kissScript = t: pkgs.writeScript "kissScript" ''
