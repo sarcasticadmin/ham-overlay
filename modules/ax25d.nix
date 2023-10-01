@@ -20,6 +20,9 @@ let
   '';
 in
 {
+  imports = [
+    ./hardware/tnc.nix
+  ];
 
   options = {
 
