@@ -57,7 +57,8 @@ in
   config = {
 
     environment.etc."ax25/axports" = {
-      source = optionalString (cfg.axports == null) (axports config.hardware.tnc);
+      #source = optionalString (cfg.axports == null) (axports config.hardware.tnc);
+      source = (axports config.hardware.tnc);
       mode = "0644";
     };
 
