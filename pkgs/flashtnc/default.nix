@@ -9,9 +9,9 @@ stdenv.mkDerivation rec {
 
   src = fetchFromGitHub {
     owner = "ninocarrillo";
-    rev = "a5dff2eca93762d2a50b6f68824ac3855b7ffbe0";
+    rev = "9841d141eaf95d786e4cd387032299906a5b01c5";
     repo = "flashtnc";
-    hash = "sha256-lmb9LmzxqdBmg1g0W7ZeGVuK3e8g6k3Ym3YR1RoOuNY=";
+    hash = "sha256-+eZ9HWiiib4rNhdRmW7TDeiI5EnN7HK7IxBSeWSyqUU=";
   };
 
   buildInputs = [
