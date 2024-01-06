@@ -1,7 +1,7 @@
 {
   inputs = {
     # many pkgs upstream havent made it in an official release yet
-    nixpkgs.url = "nixpkgs/nixos-23.05";
+    nixpkgs.url = "nixpkgs/nixos-23.11";
   };
   outputs = { self, nixpkgs, ... }:
     let
