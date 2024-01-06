@@ -21,7 +21,6 @@
         rec {
           aprx = callPackage ./pkgs/aprx { };
           ardopc = callPackage ./pkgs/ardopc { };
-          pat = callPackage ./pkgs/pat { };
           flashtnc = callPackage ./pkgs/flashtnc { };
           maidenhead = callPackage ./pkgs/maidenhead { };
           rmsgw = callPackage ./pkgs/rmsgw { };
@@ -35,7 +34,6 @@
           inherit
             aprx
             ardopc
-            pat
             flashtnc
             maidenhead
             rmsgw
