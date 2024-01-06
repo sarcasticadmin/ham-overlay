@@ -1,7 +1,7 @@
 {
   inputs = {
     # many pkgs upstream havent made it in an official release yet
-    nixpkgs.url = "nixpkgs/nixos-23.05";
+    nixpkgs.url = "nixpkgs/nixos-23.11";
   };
   outputs = { self, nixpkgs, ... }:
     let
@@ -21,7 +21,6 @@
         rec {
           aprx = callPackage ./pkgs/aprx { };
           ardopc = callPackage ./pkgs/ardopc { };
-          pat = callPackage ./pkgs/pat { };
           flashtnc = callPackage ./pkgs/flashtnc { };
           maidenhead = callPackage ./pkgs/maidenhead { };
           rmsgw = callPackage ./pkgs/rmsgw { };
@@ -35,7 +34,6 @@
           inherit
             aprx
             ardopc
-            pat
             flashtnc
             maidenhead
             rmsgw
