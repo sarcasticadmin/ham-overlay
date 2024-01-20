@@ -12,7 +12,7 @@ let
       mycall ${cfg.callSign}
       <interface>
         ax25-device $mycall
-        tx-ok ${toString cfg.txOk}
+        tx-ok ${boolToString cfg.txOk}
       </interface>
       <digipeater>
         transmitter $mycall
@@ -52,6 +52,12 @@ in
       default = "57600";
       type = types.enum [ "1200" "9600" "57600" ];
       description = lib.mdDoc "Baud rate to the TNC";
+    };
+
+    txOk = mkOption {
+      type = types.bool;
+      default = true;
+      description = lib.mdDoc "enable TX for digipeater";
     };
 
     configFile = mkOption {
