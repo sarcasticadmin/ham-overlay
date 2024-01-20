@@ -54,6 +54,12 @@ in
       description = lib.mdDoc "Baud rate to the TNC";
     };
 
+    txOk = mkOption {
+      type = types.bool;
+      default = true;
+      description = lib.mdDoc "enable TX for digipeater";
+    };
+
     configFile = mkOption {
       type = types.nullOr types.path;
       default = null;
