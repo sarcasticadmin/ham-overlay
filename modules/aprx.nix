@@ -12,7 +12,7 @@ let
       mycall ${cfg.callSign}
       <interface>
         ax25-device $mycall
-        tx-ok ${toString cfg.txOk}
+        tx-ok ${boolToString cfg.txOk}
       </interface>
       <digipeater>
         transmitter $mycall
