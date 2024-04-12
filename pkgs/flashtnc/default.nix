@@ -5,13 +5,13 @@
 }:
 stdenv.mkDerivation rec {
   pname = "flashtnc-unstable";
-  version = "2024-02-05";
+  version = "2024-04-09";
 
   src = fetchFromGitHub {
     owner = "ninocarrillo";
-    rev = "80d928383eb8c2f038e00763871a8a0203f0a7d9";
+    rev = "c4d14fddf548843b41ae4f7381910cc42121c182";
     repo = "flashtnc";
-    hash = "sha256-Z9UoO5Fp06ONgMOfjFuk6fuM84bflKnhxiRvhp79IZA=";
+    hash = "sha256-5zP+ws41K3U3Dh7mkqJk9alJtm7XidcjEnPpMxu/le0=";
   };
 
   buildInputs = [
