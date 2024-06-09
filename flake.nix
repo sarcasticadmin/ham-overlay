@@ -1,7 +1,7 @@
 {
   inputs = {
     # many pkgs upstream havent made it in an official release yet
-    nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixpkgs.url = "nixpkgs/nixos-24.05";
   };
   outputs = { self, nixpkgs, ... }:
     let
@@ -19,7 +19,6 @@
       overlays.default = (final: prev:
         with final.pkgs;
         rec {
-          aprx = callPackage ./pkgs/aprx { };
           ardopc = callPackage ./pkgs/ardopc { };
           flashtnc = callPackage ./pkgs/flashtnc { };
           maidenhead = callPackage ./pkgs/maidenhead { };
@@ -32,7 +31,6 @@
       packages.x86_64-linux =
         with pkgs; {
           inherit
-            aprx
             ardopc
             flashtnc
             maidenhead
@@ -42,7 +40,6 @@
         };
 
       nixosModules.default = {
-        aprx = import ./modules/aprx.nix;
         ax25d = import ./modules/ax25d.nix;
         axlistend = import ./modules/axlistend.nix;
         beacond = import ./modules/beacond.nix;
