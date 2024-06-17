@@ -46,8 +46,8 @@
         mheardd = import ./modules/mheardd.nix;
       };
       checks.x86_64-linux = {
-        ax25 = pkgs.testers.runNixOSTest ./tests/ax25.nix
-      };'
+        ax25 = pkgs.testers.runNixOSTest ./tests/ax25.nix;
+      };
     };
 
   # Bold green prompt for `nix develop`
