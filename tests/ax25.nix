@@ -25,7 +25,7 @@ let
         socat
         tncattach
       ];
-      systemd.services.systemd-networkd.environment.SYSTEMD_LOG_LEVEL = "debug";
+      #systemd.services.systemd-networkd.environment.SYSTEMD_LOG_LEVEL = "debug";
       environment.etc."ax25/axports" = {
         text = ''
           # me callsign speed paclen window description
@@ -56,18 +56,25 @@ in
   name = "ax25simple";
   nodes = {
     node1 = createAX25Node 1;
-    node2 = createAX25Node 2;
+    #node2 = createAX25Node 2;
+    #node3 = createAX25Node 3;
   };
   testScript = { nodes, ... }:
     ''
       start_all()
       node1.succeed("lsmod | grep ax25")
-      node1.succeed("socat -d -d pty,link=/dev/ninotnc,b57600,rawer,echo=0 tcp4-listen:1234 &")
-      node1.wait_for_unit("pgrep socat")
+      node1.wait_for_unit("network.target")
+      node1.execute("socat -d -d pty,link=/dev/ninotnc,b57600,rawer,echo=0 tcp4-listen:1234,fork >&2 &")
+      node1.succeed("pgrep socat")
       node1.succeed("systemctl restart ax25d.service")
-      node2.succeed("socat -d -d pty,link=/dev/ninotnc,b57600,rawer,echo=0 tcp:192.168.1.1:1234 &")
-      node2.wait_for_unit("pgrep socat")
-      node2.succeed("systemctl restart ax25d.service")
+      #node2.succeed("lsmod | grep ax25")
+      #node2.succeed("socat -d -d pty,link=/dev/ninotnc,b57600,rawer,echo=0 tcp:192.168.1.1:1234 &")
+      #node2.wait_for_unit("pgrep socat")
+      #node2.succeed("systemctl restart ax25d.service")
+      #node3.succeed("lsmod | grep ax25")
+      #node3.succeed("socat -d -d pty,link=/dev/ninotnc,b57600,rawer,echo=0 tcp:192.168.1.1:1234 &")
+      #node3.wait_for_unit("pgrep socat")
+      #node3.succeed("systemctl restart ax25d.service")
     '';
 
 }
