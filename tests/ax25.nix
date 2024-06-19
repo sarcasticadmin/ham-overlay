@@ -16,7 +16,7 @@ let
       }];
       # TODO
       #DISABLE FIREWALL
-      # Needed to ensure that module is loaded
+      networking.firewall.enable = false;
       boot.kernelModules = [ "ax25" ];
       environment.systemPackages = with pkgs; [
         libax25
@@ -56,8 +56,8 @@ in
   name = "ax25simple";
   nodes = {
     node1 = createAX25Node 1;
-    #node2 = createAX25Node 2;
-    #node3 = createAX25Node 3;
+    node2 = createAX25Node 2;
+    node3 = createAX25Node 3;
   };
   testScript = { nodes, ... }:
     ''
@@ -67,14 +67,14 @@ in
       node1.execute("socat -d -d pty,link=/dev/ninotnc,b57600,rawer,echo=0 tcp4-listen:1234,fork >&2 &")
       node1.succeed("pgrep socat")
       node1.succeed("systemctl restart ax25d.service")
-      #node2.succeed("lsmod | grep ax25")
-      #node2.succeed("socat -d -d pty,link=/dev/ninotnc,b57600,rawer,echo=0 tcp:192.168.1.1:1234 &")
-      #node2.wait_for_unit("pgrep socat")
-      #node2.succeed("systemctl restart ax25d.service")
-      #node3.succeed("lsmod | grep ax25")
-      #node3.succeed("socat -d -d pty,link=/dev/ninotnc,b57600,rawer,echo=0 tcp:192.168.1.1:1234 &")
-      #node3.wait_for_unit("pgrep socat")
-      #node3.succeed("systemctl restart ax25d.service")
+      node2.wait_for_unit("network.target")
+      node2.execute("socat -d -d pty,link=/dev/ninotnc,b57600,rawer,echo=0 tcp:192.168.1.1:1234 >&2 &")
+      node2.succeed("pgrep socat")
+      node2.succeed("systemctl restart ax25d.service")
+      node3.wait_for_unit("network.target")
+      node3.execute("socat -d -d pty,link=/dev/ninotnc,b57600,rawer,echo=0 tcp:192.168.1.1:1234 >&2 &")
+      node3.succeed("pgrep socat")
+      node3.succeed("systemctl restart ax25d.service")
     '';
 
 }
