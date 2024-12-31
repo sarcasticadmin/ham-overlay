@@ -3,7 +3,7 @@
 , fetchFromGitHub
 , stdenv
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "flashtnc-unstable";
   version = "2024-04-26";
 
