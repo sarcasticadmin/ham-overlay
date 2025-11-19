@@ -14,6 +14,8 @@ buildGoModule {
     hash = "sha256-4RxXgeDxw41ZnmfQJu9SYRRrQlfiMyeRjZPOdbzwggU=";
   };
 
+  vendorHash = "sha256-YKM+SRKqmAotDoZ6u4w0v5MFaiY/SDm4jqcjUvGKn5s=";
+
   patches = [
     ./0001-go.mod-go.sum.patch
   ];
