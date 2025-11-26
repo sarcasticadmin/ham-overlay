@@ -1,17 +1,17 @@
 { lib
 , python3
 , fetchFromGitHub
-, stdenv
+, stdenvNoCC
 }:
-stdenv.mkDerivation {
+stdenvNoCC.mkDerivation {
   pname = "flashtnc-unstable";
-  version = "2024-11-17";
+  version = "2025-10-10";
 
   src = fetchFromGitHub {
     owner = "ninocarrillo";
-    rev = "3ce2db6aaedc3cd5539b0fc21f762c635145e29c";
+    rev = "c9451b52726d2701f836e6b7763ad14dc1f2eef9";
     repo = "flashtnc";
-    hash = "sha256-yI5N/9vqteqvol2mvQY3+EO31TLpy8cL8Uwiupc011I=";
+    hash = "sha256-1hMn6HmLYootBjJxiJJd0QWi5Y7aVOZswNN732FrhrY=";
   };
 
   buildInputs = [
@@ -24,8 +24,7 @@ stdenv.mkDerivation {
 
   postPatch = ''
     substituteInPlace flashtnc.py \
-     --replace '<hex file>' \
-               '${placeholder "out"}/firmware/<hex file>'
+     --replace-fail '<hex file>' '${placeholder "out"}/firmware/<hex file>'
   '';
 
   installPhase = ''
