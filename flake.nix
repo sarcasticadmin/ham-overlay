@@ -1,7 +1,7 @@
 {
   inputs = {
     # many pkgs upstream havent made it in an official release yet
-    nixpkgs.url = "nixpkgs/nixos-24.05";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
   };
   outputs = { self, nixpkgs, ... }:
     let
@@ -22,6 +22,7 @@
           ardopc = callPackage ./pkgs/ardopc { };
           flashtnc = callPackage ./pkgs/flashtnc { };
           maidenhead = callPackage ./pkgs/maidenhead { };
+          ptb = callPackage ./pkgs/ptb { };
           rmsgw = callPackage ./pkgs/rmsgw { };
           wwl = callPackage ./pkgs/wwl { };
           uronode = callPackage ./pkgs/uronode { };
@@ -34,6 +35,7 @@
             ardopc
             flashtnc
             maidenhead
+            ptb
             rmsgw
             uronode
             wwl;
