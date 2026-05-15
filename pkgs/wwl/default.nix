@@ -12,10 +12,10 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-kOW4znD6IobcHAaaIiebfqI662OQZoc07La52ckxo1s=";
   };
 
-  makeFlags = [ "PREFIX=$(out)" "MANPREFIX=$(out)/man" ];
+  makeFlags = [ "PREFIX=$(out)" "MANPREFIX=$(out)/share/man" ];
 
   preInstall = ''
-    mkdir -p $out/bin $out/man/man1
+    mkdir -p $out/bin $out/share/man/man1
   '';
 
   meta = with lib; {
